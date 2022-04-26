@@ -7,8 +7,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import com.example.wickettest.service.ISampleService;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
-@WicketHomePage
 @MountPath("Home")
 public class HomePage extends WebPage{
 
@@ -25,6 +25,9 @@ public class HomePage extends WebPage{
         var timeLabel = new Label("time", timeModel);
         var randModel = Model.of(service.makeRandint());
         var randLabel = new Label("rand", randModel);
+
+        var toUserMakerLink = new BookmarkablePageLink("toUserMaker", UserMakerPage.class);
+        add(toUserMakerLink);
         add(timeLabel);
         add(nameLabel);
         add(gakusekiLabel);
