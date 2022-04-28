@@ -9,9 +9,15 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import com.example.wickettest.service.IUserService;
 
 @MountPath("UserMaker")
 public class UserMakerPage extends WebPage{
+
+    @SpringBean
+    private IUserService userService;
+
     public UserMakerPage() {
         var userNameModel = Model.of("");
         var userPassModel = Model.of("");
@@ -19,7 +25,7 @@ public class UserMakerPage extends WebPage{
         var toHomeLink = new BookmarkablePageLink<>("toHome", HomePage.class);
         add(toHomeLink);
 
-        var userInfoForm = new Form<Void>("userInfo"){
+        Form<Void> userInfoForm = new Form<Void>("userInfo"){
             @Override
             protected void onSubmit(){
                 String userName = userNameModel.getObject();
@@ -29,6 +35,7 @@ public class UserMakerPage extends WebPage{
                         + ","
                         + userPass;
                 System.out.println(msg);
+                userService.registerUser(userName, userPass);
                 setResponsePage(new UserMakerCompPage(userNameModel));
             }
         };
