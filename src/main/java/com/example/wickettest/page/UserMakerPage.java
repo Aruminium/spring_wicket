@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -41,10 +42,24 @@ public class UserMakerPage extends WebPage{
         };
         add(userInfoForm);
 
-        var userNameField = new TextField<>("userName", userNameModel);
+        var userNameField = new TextField<>("userName", userNameModel){
+            @Override
+            protected void onInitialize(){
+                super.onInitialize();
+                var validator = StringValidator.lengthBetween(8, 32);
+                add(validator);
+            }
+        };
         userInfoForm.add(userNameField);
 
-        var userPassField = new PasswordTextField("userPass", userPassModel);
+        var userPassField = new PasswordTextField("userPass", userPassModel){
+            @Override
+            protected  void onInitialize(){
+                super.onInitialize();
+                var validator = StringValidator.lengthBetween(8, 32);
+                add(validator);
+            }
+        };
         userInfoForm.add(userPassField);
         add(userInfoForm);
     }
