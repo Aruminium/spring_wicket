@@ -23,6 +23,7 @@ public class SignPage extends WebPage{
     private IUserService service;
 
     public SignPage(){
+
         var userNameModel = Model.of("");
         var userPassModel = Model.of("");
 
@@ -31,6 +32,7 @@ public class SignPage extends WebPage{
             protected void onSubmit(){
                 var userName = userNameModel.getObject();
                 var userPass = userPassModel.getObject();
+              
                 if (service.existsUser(userName, userPass)){
                     MySession.get().sign(userName);
                 }

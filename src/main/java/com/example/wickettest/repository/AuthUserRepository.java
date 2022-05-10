@@ -45,5 +45,6 @@ public class AuthUserRepository implements IAuthUserRepository{
                 DataClassRowMapper.newInstance(AuthUser.class));
 
         return users;
+
     }
 }
