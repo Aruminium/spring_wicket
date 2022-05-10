@@ -1,5 +1,9 @@
 package com.example.wickettest.service;
 
+import com.example.wickettest.data.AuthUser;
+
+import java.util.List;
+
 public interface IUserService {
     public void registerUser(String userName, String userPass);
 
@@ -12,4 +16,10 @@ public interface IUserService {
      */
     public boolean existsUser(String userName, String userPass);
 
+    /**
+     * ユーザ名とパスワードの一覧、AuthUser型のリストで検索する
+     *
+     * @return AuthUser型のListインスタンス
+     */
+    public List<AuthUser> findAuthUsers();
 }

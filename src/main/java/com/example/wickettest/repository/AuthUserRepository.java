@@ -1,9 +1,13 @@
 package com.example.wickettest.repository;
 
+import com.example.wickettest.data.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class AuthUserRepository implements IAuthUserRepository{
@@ -22,14 +26,25 @@ public class AuthUserRepository implements IAuthUserRepository{
     }
 
     @Override
-    public boolean exists(String userName, String userPass){
+    public boolean exists(String userName, String userPass) {
         var sql = "select true from auth_user "
                 + "where user_name = ? and user_pass = ?";
 
-        var booles = jdbc.query(sql,
+        var booleans = jdbc.query(sql,
                 SingleColumnRowMapper.newInstance(Boolean.class),
                 userName, userPass);
 
-        return !booles.isEmpty();
+        return !booleans.isEmpty();
+    }
+
+    @Override
+    public List<AuthUser> find() {
+        String sql = "select user_name, user_pass from auth_user";
+
+        List<AuthUser> users = jdbc.query(sql,
+                DataClassRowMapper.newInstance(AuthUser.class));
+
+        return users;
+
     }
 }

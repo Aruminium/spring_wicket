@@ -32,7 +32,8 @@ public class SignPage extends WebPage{
             protected void onSubmit(){
                 var userName = userNameModel.getObject();
                 var userPass = userPassModel.getObject();
-                if(service.existsUser(userName, userPass)){
+              
+                if (service.existsUser(userName, userPass)){
                     MySession.get().sign(userName);
                 }
                 setResponsePage(new SignedPage());
