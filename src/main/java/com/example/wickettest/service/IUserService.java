@@ -11,4 +11,5 @@ public interface IUserService {
      * @return 照合成功であれば<code>true</code>, 照合失敗は<code>false</code>
      */
     public boolean existsUser(String userName, String userPass);
+
 }

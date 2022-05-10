@@ -18,4 +18,5 @@ public interface IAuthUserRepository {
      * @return レコードの有無,存在すれば<code>true</code>,それ以外は<code>false</code>
      */
     public boolean exists(String userName, String userPass);
+
 }
