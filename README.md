@@ -1,6 +1,6 @@
 # spring + wicketのテストです
 
-(wicket_spring_boot_practice)[https://github.com/gishi-yama/wicket_spring-boot_practice]をざっくりまとめました。
+[wicket_spring_boot_practice](https://github.com/gishi-yama/wicket_spring-boot_practice)をざっくりまとめました。
 
 WicketでWebPageに表示するデータは、Springで作成・加工する
 
