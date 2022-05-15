@@ -80,6 +80,30 @@ SpringはIoC/DI用に設定されたフィールドに、実装クラスを自�
 
 `import org.apache.wicket.spring.injection.annot.SpringBean;`
 
+### 5. @Autowired
+\-- わざわざクラスをnew する必要がない
+
+-> jdbcは1つしかない.のでAutowiredをつけてほかのクラスからでも使えるようにする
+
+`import org.springframework.beans.factory.annotation.Autowired;`
+
+### 6. @Repository
+\-- DBアクセスを行います。付与することでSpirngのコンポーネントとして認識される
+
+`import org.springframework.stereotype.Repository;`
+
+### 7. @AuthorizeInstantiation(Roles.USER)
+\-- @AuthorizeInstantiation に設定されている Roles.USER
+
+USER(おそらくログイン状態であるユーザ)のときそのクラスは有効化される
+
+- MySession クラスの getRoles メソッドは、ユーザ認証済みの時に new Roles(Roles.USER) を戻す。new Roles() の中身が @AuthorizeInstantiation の値と一致しているので、ページを表示する。
+
+- 一方で、 MySession クラスの getRoles メソッドは、ユーザが未認証の時に new Roles() を戻す。new Roles() の中身が @AuthorizeInstantiation の値と一致していないので、ページを表示しない。
+
+### 8. @WicketSignInPage
+\-- ユーザ認証を行うページであることを表す。まだ認証をしていないブラウザが、認証が必要なページにアクセスすると、このページに転送されてくる
+
 ***
 ## 修飾子
 
@@ -93,14 +117,22 @@ SpringはIoC/DI用に設定されたフィールドに、実装クラスを自�
 ***
 ## データベース関連
 
+### 1. jdbcTemplate
+\-- SQL クエリまたは更新を実行することができる
+
+`import org.springframework.jdbc.core.JdbcTemplate;`
+
 
 ***
 ## メソッド・フィールド・クラス
 
-### 1.
-RowMapper
+### 1.RowMapper
+
 SingleColumnRowMapper:
-データベースのテーブルから、１列だけのデータを検索するときに使う。
+\-- データベースのテーブルから、１列だけのデータを検索するときに使う。
+
+DataClassRowMapper:
+\-- SingleColumnRowMapperの2列以上
 
 ### 2. LocalDataTime
 \-- 時間を管理するJavaのライブラリクラス
@@ -151,6 +183,14 @@ public HomePage() {
 }
 ```
 
+### 4. 	AuthenticatedWebSession クラス
+\-- ユーザー名とパスワードから認証を行う
+
+protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass()
+\-- アプリケーションで使うセッションストアのクラスを返す
+
+### 5. MySession.get().sign(userName);
+\-- セッションに、ユーザ認証が成功したユーザ名を記録する。 MySession を MySession.get() で呼び出すことがポイント
 
 
 ## まとめ
@@ -162,3 +202,12 @@ public HomePage() {
 
 - リンクを作ることで、Wicketで作成したページ間を移動できる
 - モデルを不要とするコンポーネントも存在する
+  
+1. ブラウザから入力・送信された値は、UserMakerPage の Form の onSubmit の中で取得される
+2. UserMakerPage の Form は、 IUserService のregisterUser機能に、取得した入力値（記録してほしいユーザIdとパスワード）を依頼する
+3. IUserService の registerUser 機能は、渡された入力値を IAuthUserRepository の insert 機能に依頼する
+4. IAuthUserRepository の insert 機能 は、H2DBにデータの登録を依頼し、呼び出し元に記録行数を返す
+5. IUserService の registerUser 機能は、IAuthUserRepository から返された記録行数を標準出力に表示する
+6. UserMakerPage の Form は、IUserService の registerUser機能の終了後、UserMakerCompPageを作ってブラウザに返す
+7. ブラウザに UserMakerCompPage が表示される
+
