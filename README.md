@@ -1,5 +1,7 @@
 # spring + wicketのテストです
 
+https://github.com/gishi-yama/wicket_spring-boot_practiceをざっくりまとめました。
+
 WicketでWebPageに表示するデータは、Springで作成・加工する
 
 これによって、「データの生成」（Spring）と「画面への表示」（Wicket）の役割分担を行える。
