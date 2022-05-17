@@ -83,14 +83,16 @@ SpringはIoC/DI用に設定されたフィールドに、実装クラスを自�
 `import org.apache.wicket.spring.injection.annot.SpringBean;`
 
 ### 5. @Autowired
-\-- わざわざクラスをnew する必要がない
+\-- DIコンテナに登録されているクラスを使用する.
+
+[Autowired](https://springhack.com/autowired-%EF%BC%88springboot%E3%81%AE%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%EF%BC%89/#Autowired-2)がわかりやすい
 
 -> jdbcは1つしかない.のでAutowiredをつけてほかのクラスからでも使えるようにする
 
 `import org.springframework.beans.factory.annotation.Autowired;`
 
 ### 6. @Repository
-\-- DBアクセスを行います。付与することでSpirngのコンポーネントとして認識される
+\-- DBアクセスを行います。付与することでSpirngのコンポーネントとして認識される(DIコンテナに登録)
 
 `import org.springframework.stereotype.Repository;`
 
