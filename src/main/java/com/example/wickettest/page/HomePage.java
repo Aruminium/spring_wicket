@@ -15,6 +15,7 @@ public class HomePage extends WebPage{
 
     @SpringBean
     private ISampleService service;
+
     public HomePage(){
         var youModel = Model.of("Wicket-Spring-Boot");
         var gakusekiModel = Model.of("b2201680");
