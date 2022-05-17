@@ -3,6 +3,7 @@ package com.example.wickettest.service;
 import com.example.wickettest.data.ChatData;
 import com.example.wickettest.repository.IAuthUserRepository;
 import com.example.wickettest.repository.IChatRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,12 +13,16 @@ import java.util.List;
 public class ChatService implements IChatService{
     private IChatRepository chatDataRepos;
 
+    @Autowired
+    public ChatService(IChatRepository chatDataRepos){
+        this.chatDataRepos = chatDataRepos;
+    }
+
     @Override
     public String makeCurrentHMS(){
         var now = LocalDateTime.now();
         var str = now.getHour()
-                + ":" + now.getMinute()
-                + ":" + now.getSecond();
+                + "時" + now.getMinute() + "分";
         return str;
     }
 

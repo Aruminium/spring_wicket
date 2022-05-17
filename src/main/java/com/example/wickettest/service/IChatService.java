@@ -1,6 +1,5 @@
 package com.example.wickettest.service;
 
-import com.example.wickettest.data.AuthUser;
 import com.example.wickettest.data.ChatData;
 
 import java.util.List;

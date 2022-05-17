@@ -3,12 +3,12 @@ package com.example.wickettest.data;
 public class ChatData {
     private final String userName;
     private final String msgTime;
-    private final String msg;
+    private final String msgBody;
 
-    public ChatData(String userName, String msgTime, String msg){
+    public ChatData(String userName, String msgTime, String msgBody){
         this.userName = userName;
         this.msgTime = msgTime;
-        this.msg = msg;
+        this.msgBody = msgBody;
     }
 
 
@@ -20,7 +20,7 @@ public class ChatData {
         return msgTime;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMsgBody() {
+        return msgBody;
     }
 }
