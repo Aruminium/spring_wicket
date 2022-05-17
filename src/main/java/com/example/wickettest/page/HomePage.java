@@ -28,6 +28,9 @@ public class HomePage extends WebPage{
         var randLabel = new Label("rand", randModel);
 
         var toUserMakerLink = new BookmarkablePageLink("toUserMaker", UserMakerPage.class);
+
+        var toSignInPageLink = new BookmarkablePageLink("toSignIn", SignPage.class);
+        add(toSignInPageLink);
         add(toUserMakerLink);
         add(timeLabel);
         add(nameLabel);
