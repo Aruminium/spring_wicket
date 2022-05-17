@@ -19,9 +19,9 @@ public class ChatRepository implements IChatRepository{
     }
 
     @Override
-    public int insert(String userName, String msgTime, String msgBody){
+    public int insert(String userName, String msgBody, String msgTime){
         var sql = "insert into chat_table values (?, ?, ?)";
-        var n = jdbc.update(sql, userName, msgTime, msgBody);
+        var n = jdbc.update(sql, userName, msgBody, msgTime);
         return n;
     }
 
