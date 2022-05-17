@@ -1,32 +1,29 @@
 package com.example.wickettest.page.signed;
 
+
 import com.example.wickettest.MySession;
 import com.example.wickettest.data.AuthUser;
-import com.example.wickettest.page.UserMakerPage;
-import com.example.wickettest.service.IUserService;
+import com.example.wickettest.data.ChatData;
+import com.example.wickettest.page.SignPage;
+import com.example.wickettest.service.IChatService;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
-import com.example.wickettest.page.SignPage;
-
-import java.util.List;
 
 @AuthorizeInstantiation(Roles.USER)
-@MountPath("Signed")
-public class SignedPage extends WebPage {
-
+@MountPath("chat")
+public class ChatPage extends WebPage {
     @SpringBean
-    private IUserService userService;
+    IChatService ChatService;
 
-    public SignedPage() {
+    public ChatPage(){
         var signedUserName = MySession.get().getUserName();
         var name = Model.of(signedUserName);
         var userNameLabel = new Label("userName", name);
@@ -41,26 +38,21 @@ public class SignedPage extends WebPage {
         };
         add(signoutLink);
 
-        var chatServiceLink = new BookmarkablePageLink("chatService", ChatPage.class);
-        add(chatServiceLink);
+        var chatDataModel = Model.ofList(ChatService.findChatDates());
 
-        var authUsersModel = Model.ofList(userService.findAuthUsers());
+        var chatLV = new ListView<>("chatList", chatDataModel) {
 
-        var usersLV = new ListView<>("users", authUsersModel) {
             @Override
-            protected void populateItem(ListItem<AuthUser> listItem) {
+            protected void populateItem(ListItem<ChatData> listItem) {
                 var itemModel = listItem.getModel();
                 var authUser = itemModel.getObject();
 
-                var userNameModel = Model.of(authUser.getUserName());
-                var userNameLabel = new Label("userName", userNameModel);
-                listItem.add(userNameLabel);
+//                var userNameModel = Model.of(authUser.getUserName());
+//                var userNameLabel = new Label("userName", userNameModel);
+//                listItem.add(userNameLabel);
 
-                var userPassModel = Model.of(authUser.getUserPass());
-                var userPassLabel = new Label("userPass", userPassModel);
-                listItem.add(userPassLabel);
             }
         };
-        add(usersLV);
+        add(chatLV);
     }
 }

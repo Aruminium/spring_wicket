@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:wicket="http://wicket.apache.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>チャットサービス</h1>
+    <div><a href="#" wicket:id="signout">サインアウト</a></div>
+
+<!--    <form wicket:id="newChat">-->
+<!--        <div>ユーザ名:<input type="text" wicket:id="userName"/></div>-->
+<!--        <div>メッセージ:<input type="text" wicket:id="msgBody"/></div>-->
+<!--        <div>-->
+<!--            <button type="submit">投稿</button>-->
+<!--        </div>-->
+<!--    </form>-->
+    <ol>
+        <li wicket:id="chatList">
+            <span wicket:id="userName"></span>
+            <span wicket:id="magTime"></span>
+            <span wicket:id="msgBody"></span>
+        </li>
+    </ol>
+</body>
+</html>
