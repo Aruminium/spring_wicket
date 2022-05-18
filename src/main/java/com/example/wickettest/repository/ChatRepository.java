@@ -1,6 +1,7 @@
 package com.example.wickettest.repository;
 
 import com.example.wickettest.data.ChatData;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ChatRepository implements IChatRepository{
+public class ChatRepository implements IChatRepository {
     private final JdbcTemplate jdbc;
 
     @Autowired
@@ -46,5 +47,24 @@ public class ChatRepository implements IChatRepository{
 
         return chatData;
 
+    }
+
+    @Override
+    public void changeUserName(String newUserName, String userName){
+        var sql = "update chat_table "
+                + "set user_name=? "
+                + "where user_name=?";
+
+        jdbc.update(sql,
+                newUserName, userName);
+    }
+
+    @Override
+    public List<ChatData> findUserChat(String userName){
+        var sql = "select * from chat_table where user_name=?";
+
+        List<ChatData> chatData = jdbc.query(sql,DataClassRowMapper.newInstance(ChatData.class),userName);
+
+        return chatData;
     }
 }

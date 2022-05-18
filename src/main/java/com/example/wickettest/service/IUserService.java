@@ -22,4 +22,13 @@ public interface IUserService {
      * @return AuthUser型のListインスタンス
      */
     public List<AuthUser> findAuthUsers();
+
+    /**
+     * userNameを新しくする
+     * @param newUserName 新しいユーザ名
+     * @param userName 現在のユーザ名
+     *
+     * @return ユーザ名を更新
+     */
+    public void changeUserName(String newUserName, String userName);
 }

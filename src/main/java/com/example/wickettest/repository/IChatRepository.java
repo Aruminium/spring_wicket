@@ -29,4 +29,18 @@ public interface IChatRepository {
      * @return レコードの内容を {@link ChatData} の {@link List} で返す
      */
     public List<ChatData> find();
+
+    /**
+     * userNameを新しくする
+     * @param newUserName 新しいユーザ名
+     * @param userName 現在のユーザ名
+     *
+     */
+    public void changeUserName(String newUserName, String userName);
+
+    /**
+     * 指定されたユーザのチャットを返す
+     * @param userName
+     */
+    public List<ChatData> findUserChat(String userName);
 }

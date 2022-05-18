@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AuthUserRepository implements IAuthUserRepository{
+public class AuthUserRepository implements IAuthUserRepository {
     private final JdbcTemplate jdbc;
 
     @Autowired //他のクラスでも使えるようにする
@@ -46,5 +46,15 @@ public class AuthUserRepository implements IAuthUserRepository{
 
         return users;
 
+    }
+
+    @Override
+    public void changeUserName(String newUserName, String userName){
+        var sql = "update auth_user "
+                + "set user_name=? "
+                + "where user_name=?";
+
+        jdbc.update(sql,
+                newUserName, userName);
     }
 }

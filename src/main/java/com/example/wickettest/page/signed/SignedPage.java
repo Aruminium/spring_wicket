@@ -17,6 +17,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 import com.example.wickettest.page.SignPage;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @AuthorizeInstantiation(Roles.USER)
@@ -43,6 +44,9 @@ public class SignedPage extends WebPage {
 
         var chatServiceLink = new BookmarkablePageLink("chatService", ChatPage.class);
         add(chatServiceLink);
+
+        var changeUserNameLink = new BookmarkablePageLink("changeUserName", ChangeUserNamePage.class);
+        add(changeUserNameLink);
 
         var authUsersModel = Model.ofList(userService.findAuthUsers());
 
