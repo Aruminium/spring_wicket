@@ -196,6 +196,20 @@ protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass()
 ### 5. MySession.get().sign(userName);
 \-- セッションに、ユーザ認証が成功したユーザ名を記録する。 MySession を MySession.get() で呼び出すことがポイント
 
+### 6. 部分更新
+\-- 部分更新(例えばチャットサービスでのチャット更新時にそれが反映される) 毎回ページ単位で更新したら無駄が多い。
+
+
+```java
+new AjaxLink<>("wicket:id") {
+  @Override
+  protected void onClick(AjaxRequestTarget target){
+    //処理
+  }
+}
+```
+
+`import org.apache.wicket.ajax.markup.html.AjaxLink;`
 
 ## まとめ
 
