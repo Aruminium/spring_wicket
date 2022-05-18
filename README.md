@@ -211,6 +211,8 @@ new AjaxLink<>("wicket:id") {
 
 `import org.apache.wicket.ajax.markup.html.AjaxLink;`
 
+"wicket:id"はhtmlで設定しているwicket:idを設定する.
+
 ## まとめ
 
 1. HTMLを作成
