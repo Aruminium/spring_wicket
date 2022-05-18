@@ -29,4 +29,13 @@ public interface IAuthUserRepository {
      * @return レコードの内容を {@link AuthUser} の {@link List} で返す
      */
     public List<AuthUser> find();
+
+    /**
+     * userNameを新しくする
+     * @param newUserName 新しいユーザ名
+     * @param userName 現在のユーザ名
+     *
+     * @return ユーザ名を更新
+     */
+    public void changeUserName(String newUserName, String userName);
 }

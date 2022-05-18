@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     private IAuthUserRepository authUserRepos;
 
     @Autowired
@@ -34,5 +34,10 @@ public class UserService implements IUserService{
         var users = authUserRepos.find();
         System.out.println("データ件数:" + users.size());
         return users;
+    }
+
+    @Override
+    public void changeUserName(String newUserName, String userName){
+        authUserRepos.changeUserName(newUserName, userName);
     }
 }

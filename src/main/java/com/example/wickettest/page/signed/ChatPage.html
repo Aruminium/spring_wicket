@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <wicket:link>
+        <link rel="stylesheet" type="text/css" href="ChatPage.css">
+    </wicket:link>
     <title>Title</title>
 </head>
 <body>
     <h1>チャットサービス</h1>
     <div><a href="#" wicket:id="signout">サインアウト</a></div>
+    <div><a href="#" wicket:id="toBack">戻る</a></div>
 
     <form wicket:id="newChat">
         <div>メッセージ:<input type="text" wicket:id="msgBody"/></div>
@@ -15,12 +19,21 @@
             <button type="submit">投稿</button>
         </div>
     </form>
-    <ol>
-        <li wicket:id="chatList">
-            <span wicket:id="userName"></span>
-            <span wicket:id="msgTime"></span>
-            <span wicket:id="msgBody"></span>
-        </li>
-    </ol>
+    <table>
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>メッセージ</th>
+                <th>投稿時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr wicket:id="chatList">
+                <td><a href="#" wicket:id="toUserName"></a></td>
+                <td wicket:id="msgTime"></td>
+                <td wicket:id="msgBody"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

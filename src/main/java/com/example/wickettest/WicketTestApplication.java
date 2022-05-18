@@ -18,4 +18,10 @@ public class WicketTestApplication extends WicketBootSecuredWebApplication {
         return MySession.class;
     }
 
+    @Override
+    protected void init(){
+        super.init();
+        getCspSettings().blocking().disabled();
+    }
+
 }
